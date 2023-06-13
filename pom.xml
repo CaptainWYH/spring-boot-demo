@@ -10,6 +10,7 @@
 
     <modules>
         <module>demo-hello</module>
+        <module>demo-redis</module>
     </modules>
 
     <packaging>pom</packaging>
