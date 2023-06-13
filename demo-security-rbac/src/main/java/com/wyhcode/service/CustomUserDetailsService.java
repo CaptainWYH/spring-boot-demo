@@ -7,8 +7,10 @@ package com.wyhcode.service;
  */
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.wyhcode.entity.Permission;
 import com.wyhcode.entity.Role;
 import com.wyhcode.entity.User;
+import com.wyhcode.entity.vo.UserPrincipal;
 import com.wyhcode.mapper.PermissionMapper;
 import com.wyhcode.mapper.RoleMapper;
 import com.wyhcode.mapper.UserMapper;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 自定义查询用户
@@ -48,6 +51,10 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .eq(User::getPhone, username));
         //获取用户相关角色
         List<Role> roles = roleMapper.selectByUserId(user.getId());
-        return null;
+        //提取角色id
+        List<Long> roleIds = roles.stream().map(Role::getId).collect(Collectors.toList());
+        //获取相关权限信息
+        List<Permission> permissionList = permissionMapper.selectByRoleId(roleIds);
+        return UserPrincipal.create(user,roles,permissionList);
     }
 }
