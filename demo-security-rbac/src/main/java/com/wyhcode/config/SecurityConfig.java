@@ -59,6 +59,7 @@ public class SecurityConfig {
                 //认证请求
                 .and()
                 .authorizeRequests()
+                .antMatchers("/login").permitAll()
                 //所有请求都需要登录
                 .anyRequest()
                 .authenticated()

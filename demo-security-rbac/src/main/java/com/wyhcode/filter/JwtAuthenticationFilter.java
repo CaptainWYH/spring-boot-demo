@@ -60,7 +60,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = jwtUtil.getJwtFromRequest(request);
 
         // 判断token是否为空
-        if (!StrUtil.isNotBlank(token)){
+        if (StrUtil.isNotBlank(token)){
             //获取 用户名
             String username = jwtUtil.getUserNameFromJWT(token);
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
