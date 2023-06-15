@@ -56,6 +56,7 @@ public class GlobalExceptionHandler {
             return ApiResponse.ofException((BaseException) e);
         }
         log.error("【全局异常拦截】: 异常信息 {} ", e.getMessage());
+        e.printStackTrace();
         return ApiResponse.ofStatus(StatusEnum.ERROR);
     }
 }

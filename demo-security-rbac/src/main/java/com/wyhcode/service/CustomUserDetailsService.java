@@ -46,9 +46,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //根据用户名获取用户信息
         User user = userMapper.selectOne(new LambdaQueryWrapper<User>()
-                .eq(User::getNickname, username)
-                .eq(User::getEmail, username)
-                .eq(User::getPhone, username));
+                .eq(User::getUsername, username)
+                .or().eq(User::getEmail, username)
+                .or().eq(User::getPhone, username));
         //获取用户相关角色
         List<Role> roles = roleMapper.selectByUserId(user.getId());
         //提取角色id

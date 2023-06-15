@@ -52,7 +52,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if (checkIgnores(request)){
+
+        if (checkIgnores(request) || request.getRequestURI().contains("doc.html")){
             filterChain.doFilter(request,response);
             return;
         }

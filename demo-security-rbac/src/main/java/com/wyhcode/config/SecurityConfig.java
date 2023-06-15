@@ -1,5 +1,6 @@
 package com.wyhcode.config;
 
+import com.sun.org.apache.xpath.internal.operations.String;
 import com.wyhcode.filter.JwtAuthenticationFilter;
 import com.wyhcode.service.CustomUserDetailsService;
 import com.wyhcode.util.JwtUtil;
@@ -53,20 +54,16 @@ public class SecurityConfig {
         http.cors()
                 //关闭csrf
                 .and().csrf().disable()
+                //拦截规则
+                .authorizeRequests()
+                .antMatchers().permitAll()
+                //所有请求都需要登录
+                .anyRequest().authenticated()
                 //登录
+                .and()
                 .formLogin()
                 .loginProcessingUrl("/api/auth/login")
-                //认证请求
-                .and()
-                .authorizeRequests()
-                .antMatchers("/login").permitAll()
-                //所有请求都需要登录
-                .anyRequest()
-                .authenticated()
-                //RBAC 动态url认证    5.2版本后不能同时出现一个以上anyRequest   TODO  考虑使用拦截器做这一步
-//                .anyRequest()
-//                .access("@rbacAuthorityService.hasPermission(request,authentication)")
-
+                .permitAll()
                 //登出行为
                 .and().logout().disable()
                 //Session 管理
@@ -110,6 +107,7 @@ public class SecurityConfig {
 
             // 按照请求格式忽略
             customConfig.getIgnores().getPattern().forEach(url -> web.ignoring().antMatchers(url));
+
         });
     }
 
@@ -125,7 +123,5 @@ public class SecurityConfig {
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthenticationProvider;
     }
-
-
 
 }
