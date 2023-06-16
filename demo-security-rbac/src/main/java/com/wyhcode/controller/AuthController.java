@@ -5,6 +5,7 @@ import com.wyhcode.entity.User;
 import com.wyhcode.entity.vo.JwtResponse;
 import com.wyhcode.entity.vo.LoginRequest;
 import com.wyhcode.entity.vo.user.UserBaseVO;
+import com.wyhcode.enums.StatusEnum;
 import com.wyhcode.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -49,5 +50,11 @@ public class AuthController {
         BeanUtils.copyProperties(userBaseVO,user);
         userService.save(user);
         return ApiResponse.ofSuccess("注册成功");
+    }
+
+    @GetMapping("/logout")
+    public ApiResponse logout(){
+        SecurityContextHolder.clearContext();
+        return ApiResponse.ofSuccess(StatusEnum.LOGOUT);
     }
 }

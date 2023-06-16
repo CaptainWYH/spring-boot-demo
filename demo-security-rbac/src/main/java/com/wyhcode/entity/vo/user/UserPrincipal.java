@@ -6,10 +6,7 @@ import com.wyhcode.entity.Permission;
 import com.wyhcode.entity.Role;
 import com.wyhcode.entity.User;
 import com.wyhcode.enums.Consts;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,6 +23,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class UserPrincipal implements UserDetails {
 
     /**
@@ -36,6 +34,7 @@ public class UserPrincipal implements UserDetails {
     /**
      * 用户名
      */
+    @JsonIgnore
     private String username;
 
     /**
