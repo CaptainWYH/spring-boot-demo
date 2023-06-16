@@ -1,8 +1,6 @@
 package com.wyhcode.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +16,7 @@ public class Role {
     /**
      * 主键
      */
-    @Id
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     /**

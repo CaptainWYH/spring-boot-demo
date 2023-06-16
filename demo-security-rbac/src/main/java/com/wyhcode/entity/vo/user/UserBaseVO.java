@@ -1,23 +1,27 @@
-package com.wyhcode.entity;
+package com.wyhcode.entity.vo.user;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
+
+/**
+ * @author weiyuhui
+ * @date 2023/6/16 15:12
+ * @description
+ */
 
 @Data
-@TableName("sec_user")
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class User {
+public class UserBaseVO {
 
     /**
      * 主键
      */
-    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     /**

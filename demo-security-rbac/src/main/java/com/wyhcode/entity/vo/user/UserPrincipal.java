@@ -1,4 +1,4 @@
-package com.wyhcode.entity.vo;
+package com.wyhcode.entity.vo.user;
 
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;

@@ -1,5 +1,7 @@
 package com.wyhcode.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +18,7 @@ public class Permission {
     /**
      * 主键
      */
-    @Id
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     /**

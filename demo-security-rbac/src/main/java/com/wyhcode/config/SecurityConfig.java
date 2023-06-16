@@ -1,14 +1,9 @@
 package com.wyhcode.config;
 
-import com.sun.org.apache.xpath.internal.operations.String;
-import com.wyhcode.filter.JwtAuthenticationFilter;
 import com.wyhcode.service.CustomUserDetailsService;
-import com.wyhcode.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -16,64 +11,37 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsUtils;
 
 @Configuration
 @EnableWebSecurity
-@EnableConfigurationProperties(CustomConfig.class)
 public class SecurityConfig {
 
-    @Autowired
-    private CustomConfig customConfig;
-
-    @Autowired
-    private AccessDeniedHandler accessDeniedHandler;
-
-    @Autowired
-    private JwtUtil jwtUtil;
-
-    @Autowired
-    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
 
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors()
-                //关闭csrf
-                .and().csrf().disable()
-                //拦截规则
-                .authorizeRequests()
-                .antMatchers().permitAll()
-                //所有请求都需要登录
+        //关闭csrf  以免影响前端接口请求
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
+        http.cors();
+        // 这里是关键配置   决定那些接口开启防护，那些接口绕过防护
+        http.authorizeRequests()
+                // 这是允许前端跨域联调的一个必要配置
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                // 指定某些接口不需要研究就可以访问   常见登陆，注册接口
+                .antMatchers("/api/auth/login","/api/auth/register").permitAll()
+                // 这里的意思是其余的所有接口都需要认证才能访问
                 .anyRequest().authenticated()
-                //登录
-                .and()
-                .formLogin()
-                .loginProcessingUrl("/api/auth/login")
-                .permitAll()
-                //登出行为
-                .and().logout().disable()
-                //Session 管理
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
-                //异常处理
-                .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
-        //添加自定义JWT过滤器
-        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                // 指定认证错误处理器
+                .and().exceptionHandling().authenticationEntryPoint(new AuthEntryPoint());
         return http.build();
     }
 
@@ -82,34 +50,18 @@ public class SecurityConfig {
         // configure Web security...
         return (web -> {
             // 忽略 GET
-            customConfig.getIgnores().getGet().forEach(url -> web.ignoring().antMatchers(HttpMethod.GET, url));
-
-            // 忽略 POST
-            customConfig.getIgnores().getPost().forEach(url -> web.ignoring().antMatchers(HttpMethod.POST, url));
-
-            // 忽略 DELETE
-            customConfig.getIgnores().getDelete().forEach(url -> web.ignoring().antMatchers(HttpMethod.DELETE, url));
-
-            // 忽略 PUT
-            customConfig.getIgnores().getPut().forEach(url -> web.ignoring().antMatchers(HttpMethod.PUT, url));
-
-            // 忽略 HEAD
-            customConfig.getIgnores().getHead().forEach(url -> web.ignoring().antMatchers(HttpMethod.HEAD, url));
-
-            // 忽略 PATCH
-            customConfig.getIgnores().getPatch().forEach(url -> web.ignoring().antMatchers(HttpMethod.PATCH, url));
-
-            // 忽略 OPTIONS
-            customConfig.getIgnores().getOptions().forEach(url -> web.ignoring().antMatchers(HttpMethod.OPTIONS, url));
-
-            // 忽略 TRACE
-            customConfig.getIgnores().getTrace().forEach(url -> web.ignoring().antMatchers(HttpMethod.TRACE, url));
-
-            // 按照请求格式忽略
-            customConfig.getIgnores().getPattern().forEach(url -> web.ignoring().antMatchers(url));
 
         });
     }
+    /**
+     * 强哈希加密算法
+     * @return BCryptPasswordEncoder
+     */
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {

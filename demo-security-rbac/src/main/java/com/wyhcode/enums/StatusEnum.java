@@ -90,7 +90,9 @@ public enum StatusEnum {
     /**
      * 无法手动踢出自己，请尝试退出登录操作！
      */
-    KICKOUT_SELF(5004, "无法手动踢出自己，请尝试退出登录操作！");
+    KICKOUT_SELF(5004, "无法手动踢出自己，请尝试退出登录操作！"),
+
+    USER_NOT_EXIST(5005,"没有找到该用户");
 
     private final Integer code;
 
