@@ -3,7 +3,7 @@ server:
 
 spring:
   redis:
-    host: localhost
+    host: 192.168.134.128
     password: 123456
     port: 6379
     # 连接超时时间（记得添加单位，Duration）
