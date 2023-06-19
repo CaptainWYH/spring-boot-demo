@@ -10,4 +10,12 @@ import com.wyhcode.entity.User;
 
 public interface UserService {
     void save(User user);
+
+    /**
+     * 登陆认证
+     * @param userName
+     * @param password
+     * @return
+     */
+    String login(String userName,String password);
 }

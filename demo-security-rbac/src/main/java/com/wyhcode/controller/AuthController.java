@@ -38,10 +38,13 @@ public class AuthController {
     @PostMapping("/login")
     public ApiResponse login(@Valid @RequestBody LoginRequest loginRequest){
         //AuthenticationManager校验这个认证信息，返回一个已认定的Authentication    UsernamePasswordAuthenticationToken 封装用户信息
-        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsernameOrEmailOrPhone(), loginRequest.getPassword()));
+//        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsernameOrEmailOrPhone(), loginRequest.getPassword()));
         //将返回的认证信息存储到上下文中
-        SecurityContextHolder.getContext().setAuthentication(authenticate);
-        return ApiResponse.ofSuccess("登录成功");
+//        SecurityContextHolder.getContext().setAuthentication(authenticate);
+
+        //使用自己的登陆业务  TODO 登陆业务待做
+        String token = userService.login(loginRequest.getUsernameOrEmailOrPhone(), loginRequest.getPassword());
+        return ApiResponse.ofSuccess(token);
     }
 
     @PostMapping("/register")
