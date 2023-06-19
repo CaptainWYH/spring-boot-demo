@@ -1,5 +1,6 @@
 package com.wyhcode.config;
 
+import com.wyhcode.filter.LoginFilter;
 import com.wyhcode.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsUtils;
 
 @Configuration
@@ -25,7 +27,8 @@ public class SecurityConfig {
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
-
+    @Autowired
+    private LoginFilter loginFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -45,6 +48,8 @@ public class SecurityConfig {
                 .and().exceptionHandling().authenticationEntryPoint(new AuthEntryPoint());
         //禁用session
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        // 自定义过滤器配置
+        http.addFilterBefore(loginFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

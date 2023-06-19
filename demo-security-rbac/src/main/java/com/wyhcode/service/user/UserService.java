@@ -1,6 +1,7 @@
 package com.wyhcode.service.user;
 
 import com.wyhcode.entity.User;
+import com.wyhcode.entity.vo.user.LoginUserResponseVO;
 
 /**
  * @author weiyuhui
@@ -17,5 +18,5 @@ public interface UserService {
      * @param password
      * @return
      */
-    String login(String userName,String password);
+    LoginUserResponseVO login(String userName, String password);
 }

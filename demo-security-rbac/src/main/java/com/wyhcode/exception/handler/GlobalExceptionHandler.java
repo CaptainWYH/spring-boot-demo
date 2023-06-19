@@ -6,10 +6,12 @@ import cn.hutool.json.JSONUtil;
 import com.wyhcode.common.ApiResponse;
 import com.wyhcode.common.BaseException;
 import com.wyhcode.enums.StatusEnum;
+import com.wyhcode.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
+import org.springframework.stereotype.Service;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -26,6 +28,8 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+
+
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
@@ -54,6 +58,9 @@ public class GlobalExceptionHandler {
         } else if (e instanceof BaseException) {
             log.error("【全局异常拦截】DataManagerException: 状态码 {}, 异常信息 {}", ((BaseException) e).getCode(), e.getMessage());
             return ApiResponse.ofException((BaseException) e);
+        } else if (e instanceof ServiceException){
+            log.error("[全局异常拦截 ] 状态码：{}，异常信息:{}",((ServiceException) e).getCode(),((ServiceException) e).getMsg());
+            return ApiResponse.ofStatus(StatusEnum.USERNAME_PASSWORD_ERROR);
         }
         log.error("【全局异常拦截】: 异常信息 {} ", e.getMessage());
         e.printStackTrace();

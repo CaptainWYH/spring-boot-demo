@@ -100,7 +100,7 @@ public class JwtUtil {
     public Claims parseJWT(String jwt){
 
         try {
-            Claims claims = Jwts.parser().setSigningKey(jwtConfig.getKey()).parseClaimsJwt(jwt).getBody();
+            Claims claims = Jwts.parser().setSigningKey(jwtConfig.getKey()).parseClaimsJws(jwt).getBody();
 
             //获取用户名
             String username = claims.getSubject();
@@ -125,6 +125,7 @@ public class JwtUtil {
             throw exception(StatusEnum.TOKEN_EXPIRED);
         } catch (UnsupportedJwtException e) {
             log.error("不支持的 Token");
+            e.printStackTrace();
             throw exception(StatusEnum.TOKEN_PARSE_ERROR);
         } catch (MalformedJwtException e) {
             log.error("Token 无效");
