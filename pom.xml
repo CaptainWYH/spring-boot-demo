@@ -12,6 +12,7 @@
         <module>demo-hello</module>
         <module>demo-redis</module>
         <module>demo-security-rbac</module>
+        <module>demo-modbus</module>
     </modules>
 
     <packaging>pom</packaging>
