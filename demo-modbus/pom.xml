@@ -18,6 +18,21 @@
     </properties>
 
     <dependencies>
-
+        <!--jlibmodbus-->
+        <dependency>
+            <groupId>com.intelligt.modbus</groupId>
+            <artifactId>jlibmodbus</artifactId>
+            <!-- 版本号可依照maven仓库迭代升级 -->
+            <version>1.2.9.7</version>
+        </dependency>
+        <!---->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
     </dependencies>
 </project>
