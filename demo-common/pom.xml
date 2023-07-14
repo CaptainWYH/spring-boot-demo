@@ -24,6 +24,10 @@
             <version>1.18.28</version>
             <scope>pom</scope>
         </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

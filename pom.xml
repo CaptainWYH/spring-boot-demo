@@ -15,7 +15,8 @@
         <module>demo-modbus</module>
         <module>demo-design</module>
         <module>demo-common</module>
-    </modules>
+		<module>demo-mybatis</module>
+	</modules>
 
     <packaging>pom</packaging>
     <properties>
