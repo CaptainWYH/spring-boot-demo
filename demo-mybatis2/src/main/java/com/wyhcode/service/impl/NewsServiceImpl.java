@@ -24,6 +24,7 @@ public class NewsServiceImpl implements NewsService {
     public PageInfo<NewsResponseVO> getAddressPage(int page, int size) {
         // 开启分页
         PageHelper.startPage(page,size);
+        System.out.println("1");
         List<News> newsPage = newsMapper.getNewsPage();
         List<NewsResponseVO> collect = newsPage.stream().map(e -> {
             NewsResponseVO newsResponseVO = new NewsResponseVO();
