@@ -2,6 +2,7 @@ package com.wyhcode.mapper;
 
 import com.wyhcode.pojo.Address;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -10,4 +11,5 @@ public interface AddressMapper {
 
 
     List<Address> getAddressPage();
+
 }
