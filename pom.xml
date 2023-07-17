@@ -17,6 +17,7 @@
         <module>demo-common</module>
 		<module>demo-mybatis</module>
         <module>demo-mybatis2</module>
+        <module>demo-rabbitmq</module>
     </modules>
 
     <packaging>pom</packaging>
