@@ -24,8 +24,8 @@ public class RabitMQTest {
 
     @Test
     public void test01(){
-        for (int i = 0;i <= 100000; i++){
-            orderProducer.createOrder();
+        for (int i = 1;i <= 10; i++){
+            orderProducer.createOrder(i);
         }
     }
 }
