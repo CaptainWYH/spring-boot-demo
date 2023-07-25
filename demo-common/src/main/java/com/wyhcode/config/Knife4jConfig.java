@@ -31,7 +31,7 @@ public class Knife4jConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .description("Kinfe4j 集成测试文档")
-                .contact(new Contact("魏渝辉", "https://cunyu.gitub.io/JavaPark", "747731461@qq.com"))
+                .contact(new Contact("魏渝辉", "https://wyh918.top", "1264787656@qq.com"))
                 .version("v1.1.0")
                 .title("API测试文档")
                 .build();

@@ -1,0 +1,8 @@
+server:
+  port: 8080
+spring:
+ elasticsearch:
+   rest:
+     uris: wyh-dev.com:9200
+     connection-timeout: 10S
+     read-timeout: 30S
