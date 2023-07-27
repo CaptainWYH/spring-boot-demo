@@ -1,6 +1,7 @@
 package com.wyhcode.service.student;
 
 import com.wyhcode.bean.es.Student;
+import org.springframework.data.elasticsearch.core.SearchHits;
 
 /**
  * @author weiyuhui
@@ -15,4 +16,6 @@ public interface StudentService {
      * @param student
      */
     public void addStudent(Student student);
+
+    SearchHits<Student> selectByName(String key);
 }
