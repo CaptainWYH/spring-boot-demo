@@ -1,0 +1,8 @@
+server:
+  port: 7540
+
+oss:
+  endpoint: -
+  accessKeyId: -
+  accessKeySecret: -
+  bucketName: -

@@ -19,6 +19,7 @@
         <module>demo-mybatis2</module>
         <module>demo-rabbitmq</module>
         <module>demo-elasticsearch</module>
+        <module>demo-oss</module>
     </modules>
 
     <packaging>pom</packaging>

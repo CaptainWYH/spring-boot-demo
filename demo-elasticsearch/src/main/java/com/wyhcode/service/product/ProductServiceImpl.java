@@ -6,6 +6,7 @@ import com.wyhcode.bean.vo.ProductRequestVO;
 import com.wyhcode.respsitory.ProductMapper;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchPhraseQueryBuilder;
+import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.springframework.data.domain.Page;
@@ -75,7 +76,7 @@ public class ProductServiceImpl implements ProductService{
     public SearchHits<Product> searchHits(ProductRequestVO productRequestVO) {
         PageRequest pageRequest = PageRequest.of(productRequestVO.getCurPage(), productRequestVO.getPageSize());
         // 构建查询条件
-        MatchPhraseQueryBuilder queryBuilder = QueryBuilders.matchPhraseQuery("title", productRequestVO.getKeyword());
+        MatchQueryBuilder queryBuilder = QueryBuilders.matchQuery("title", productRequestVO.getKeyword());
         // 设置高亮字体
         HighlightBuilder highlightBuilder = new HighlightBuilder();
         highlightBuilder.preTags("<font color='red'>");
