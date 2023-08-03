@@ -17,12 +17,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Person {
 
+    /**
+     * 姓名
+     */
     private String name;
 
+    /**
+     * 收入
+     */
     private Integer salary;
-
-
+    /**
+     * 性别
+     */
     private String sex;
-
+    /**
+     * 地址
+     */
     private String location;
 }
