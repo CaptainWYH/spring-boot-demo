@@ -22,22 +22,29 @@ public class LogPointAspectPoint {
 
     }
 
-    @After("logPointCut()")
-    public void doAfter(JoinPoint joinPoint){
+    @AfterReturning(value = "logPointCut()",returning = "ret")
+    public void doAfter(JoinPoint joinPoint,Object ret){
         log.info("=============END============");
+        log.info("ART   {}",ret);
     }
 
     @Around("logPointCut()")
     public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
         // 执行切入点
-        Person person = (Person) proceedingJoinPoint.proceed();
-        // 出参
-        log.info("方法返回参数为 ↓");
-        log.info("姓名：{}",person.getName());
-        log.info("性别：{}",person.getSex());
-        // 执行耗时
-        log.info("Time-Consuming:{} ms",System.currentTimeMillis() - startTime);
+
+        Person person = null;
+        try {
+            person = (Person) proceedingJoinPoint.proceed();
+            // 出参
+            log.info("方法返回参数为 ↓");
+            log.info("姓名：{}",person.getName());
+            log.info("性别：{}",person.getSex());
+            // 执行耗时
+            log.info("Time-Consuming:{} ms",System.currentTimeMillis() - startTime);
+        } catch (Exception e) {
+            log.info("程序执行异常，进行异常处理逻辑");
+        }
         return person;
     }
 
