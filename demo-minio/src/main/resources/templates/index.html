@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FilePond from CDN</title>
+
+    <!-- Filepond stylesheet -->
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- We'll transform this input into a pond -->
+<input type="file"
+       class="filepond"
+       name="filepond"
+       multiple
+       data-allow-reorder="true"
+       data-max-file-size="3MB"
+       data-max-files="3">
+
+<!-- Load FilePond library -->
+<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+
+<!-- Turn all file input elements into ponds -->
+<script>
+    // 该parse方法让我们自动在页面上加载 FilePond 元素。
+    FilePond.parse(document.body);
+    // 设置选项
+    FilePond.setOptions({
+        server: '/minio/upload',// 后端地址
+        name: 'file' // 设置文件参数
+    });
+</script>
+
+</body>
+</html>
