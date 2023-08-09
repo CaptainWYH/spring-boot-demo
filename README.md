@@ -7,11 +7,18 @@
 
 ***
 
-- [x] spring-boot-elasticsearch
-- [x] spring-boot-secutiry  JWT
-- [x] spring-boot-oss
-- [x] spring-boot-mybatis
-- [x] spring-boot-redis
-- [x] spring-boot-rabbitmq
-- [x] spring-boot-minio
-- [x] spring-boot-knife4j
+✅spring-boot-elasticsearch
+
+✅spring-boot-secutiry  JWT
+
+✅spring-boot-oss
+
+✅spring-boot-mybatis
+
+✅spring-boot-redis
+
+✅spring-boot-rabbitmq
+
+✅spring-boot-minio
+
+✅spring-boot-knife4j
