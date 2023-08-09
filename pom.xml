@@ -20,6 +20,7 @@
         <module>demo-rabbitmq</module>
         <module>demo-elasticsearch</module>
         <module>demo-oss</module>
+        <module>demo-minio</module>
     </modules>
 
     <packaging>pom</packaging>

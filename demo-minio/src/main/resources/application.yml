@@ -1,0 +1,14 @@
+server:
+  port: 8081
+spring:
+  # 配置文件上传大小限制
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+minio:
+  host: http://wyh-dev.com:9000
+  url: ${minio.host}/${minio.bucket}/
+  access-key: minioadmin
+  secret-key: minioadmin
+  bucket: public
