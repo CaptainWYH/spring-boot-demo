@@ -1,0 +1,10 @@
+server:
+  port: 9899
+spring:
+  application:
+    name: user-service
+  cloud:
+    nacos:
+      discovery:
+        # 配置nacos注册中心地址
+        serverAddr: http://192.168.238.130:8848

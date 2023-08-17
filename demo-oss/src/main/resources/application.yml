@@ -2,7 +2,7 @@ server:
   port: 7540
 
 oss:
-  endpoint: -
-  accessKeyId: -
-  accessKeySecret: -
-  bucketName: -
+  endpoint: oss-cn-beijing.aliyuncs.com
+  accessKeyId: LTAI5t79UFTuxvcCrJR9haAV
+  accessKeySecret: 92uV6GyGC0Z5SROaIgqjEq6Fjxeu64
+  bucketName: oss-wyh-study
