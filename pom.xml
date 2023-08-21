@@ -23,6 +23,7 @@
         <module>demo-minio</module>
         <module>cloud-book-service</module>
         <module>cloud-user-service</module>
+        <module>demo-gof-23</module>
     </modules>
 
     <packaging>pom</packaging>
