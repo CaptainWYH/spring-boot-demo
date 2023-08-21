@@ -5,9 +5,9 @@
 
 ###  目前已经整合demo如下
 
- ✅ - 已完成
+     ✅ ↔️ 已完成
 
- 🚩 - 待完成
+     🚩 ↔️ 待完成
 
 * ✅spring-boot-elasticsearch
 
