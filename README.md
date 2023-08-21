@@ -7,18 +7,20 @@
 
 ***
 
-✅spring-boot-elasticsearch
+* ✅spring-boot-elasticsearch
 
-✅spring-boot-secutiry  JWT
+* ✅spring-boot-secutiry  JWT
 
-✅spring-boot-oss
+* ✅spring-boot-oss
 
-✅spring-boot-mybatis
+* ✅spring-boot-mybatis
 
-✅spring-boot-redis
+* ✅spring-boot-redis
 
-✅spring-boot-rabbitmq
+* ✅spring-boot-rabbitmq
 
-✅spring-boot-minio
+* ✅spring-boot-minio
 
-✅spring-boot-knife4j
+* ✅spring-boot-knife4j
+
+* 🚩23种常用设计模式
