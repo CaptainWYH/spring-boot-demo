@@ -24,6 +24,7 @@
         <module>cloud-book-service</module>
         <module>cloud-user-service</module>
         <module>demo-gof-23</module>
+        <module>demo-starter</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -37,6 +38,7 @@
         <hutool.version>5.8.4</hutool.version>
         <guava.version>31.1-jre</guava.version>
         <lombok.version>1.18.28</lombok.version>
+        <spring.boot.druid.version>1.1.21</spring.boot.druid.version>
         <mybatis.plus.version>3.5.3</mybatis.plus.version>
     </properties>
 
@@ -57,6 +59,12 @@
                 <version>${spring.cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!-- springboot-druid -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${spring.boot.druid.version}</version>
             </dependency>
 
             <!-- Spring Cloud Alibaba -->
