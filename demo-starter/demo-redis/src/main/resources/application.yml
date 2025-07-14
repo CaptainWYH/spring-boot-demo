@@ -3,8 +3,8 @@ server:
 
 spring:
   redis:
-    host: 192.168.134.130
-    password: 123456
+    host: localhost
+    password:
     port: 6379
     # 连接超时时间（记得添加单位，Duration）
     timeout: 10000ms

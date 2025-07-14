@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = ElasticSearchApplication.class)
+//@SpringBootTest(classes = ElasticSearchApplication.class)
 @Slf4j
 public class SpringDataESInsertTest {
 
