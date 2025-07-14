@@ -1,9 +1,18 @@
 server:
+  compression:
+    enabled: true
+    min-response-size: 1024
   port: 8080
-  tomcat:
-    accept-count: 2000
+#  tomcat:
+#    accept-count: 2000
+#    threads:
+#      max: 800
+  undertow:
     threads:
-      max: 800
+      worker: 400
+      io: 16
+    direct-buffers: true
+    buffer-size: 1024
 spring:
   redis:
     host: localhost
