@@ -1,6 +1,12 @@
 package com.wyhcode.config;
 
 import com.wyhcode.service.RedisService;
+import lombok.Data;
+import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
+import org.redisson.config.TransportMode;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -28,15 +34,25 @@ import java.time.Duration;
  * @description
  */
 
+@Data
 @Configuration
 @AutoConfigureAfter(RedisAutoConfiguration.class)
 @EnableCaching
 public class RedisConfig {
+
+    @Value("${spring.redis.port}")
+    private String port;
+
+    @Value("${spring.redis.host}")
+    private String host;
+
+    @Value("${spring.redis.password:}")
+    private String password;
     /**
      * 默认情况下的模板只能支持RedisTemplate<String, String>，也就是只能存入字符串，因此支持序列化
      */
     @Bean
-    public RedisTemplate<String, Object> redisCacheTemplate(LettuceConnectionFactory redisConnectionFactory) {
+    public RedisTemplate<String, Object> redisCacheTemplate(RedisConnectionFactory connectionFactory) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
 
 
@@ -47,7 +63,7 @@ public class RedisConfig {
         template.setHashKeySerializer(new StringRedisSerializer());
         template.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
 
-        template.setConnectionFactory(redisConnectionFactory);
+        template.setConnectionFactory(connectionFactory);
         return template;
     }
 
@@ -85,5 +101,18 @@ public class RedisConfig {
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
 
         return RedisCacheManager.builder(factory).cacheDefaults(redisCacheConfiguration).build();
+    }
+
+    @Bean
+    public RedissonClient redissonClient() {
+        Config config = new Config();
+        config.useSingleServer().setAddress("redis://"+ host + ":" +  port);
+        if (org.springframework.util.StringUtils.hasText(password)) {
+            config.useSingleServer().setPassword(password);
+        }
+        config.setThreads(Runtime.getRuntime().availableProcessors());
+        config.setNettyThreads(Runtime.getRuntime().availableProcessors());
+        config.setTransportMode(TransportMode.NIO);
+        return Redisson.create(config);
     }
 }

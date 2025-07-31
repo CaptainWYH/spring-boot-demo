@@ -15,6 +15,8 @@ server:
 #    direct-buffers: true
 #    buffer-size: 1024
 spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
   redis:
     host: localhost
     port: 6379

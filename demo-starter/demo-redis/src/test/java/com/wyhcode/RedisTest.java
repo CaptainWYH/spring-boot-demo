@@ -4,9 +4,12 @@ import com.wyhcode.DemoRedisApplicationTest;
 import com.wyhcode.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.Serializable;
 import java.util.concurrent.ExecutorService;
@@ -19,8 +22,10 @@ import java.util.stream.IntStream;
  * @description
  */
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 @Slf4j
-public class RedisTest extends DemoRedisApplicationTest {
+public class RedisTest {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;

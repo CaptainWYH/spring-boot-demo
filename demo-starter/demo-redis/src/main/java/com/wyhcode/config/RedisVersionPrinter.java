@@ -2,6 +2,7 @@ package com.wyhcode.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +10,7 @@ import java.util.Objects;
 
 @Component
 @Slf4j
+@ConditionalOnBean(RedisConnectionFactory.class)
 public class RedisVersionPrinter implements CommandLineRunner {
 
     private final RedisConnectionFactory redisConnectionFactory;

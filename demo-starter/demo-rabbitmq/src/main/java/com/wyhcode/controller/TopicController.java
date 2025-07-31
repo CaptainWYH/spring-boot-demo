@@ -6,6 +6,7 @@ import com.wyhcode.bean.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,7 @@ import static com.wyhcode.config.TopicMqConfig.TOPIC_EXCHANGE;
 
 @RestController
 @Api("主题消息")
+@ConditionalOnBean(RabbitTemplate.class)
 public class TopicController {
 
     @Resource

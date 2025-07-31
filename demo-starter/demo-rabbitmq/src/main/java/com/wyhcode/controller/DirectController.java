@@ -3,6 +3,7 @@ package com.wyhcode.controller;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,7 @@ import static com.wyhcode.config.DirectMqConfig.DIRECT_ROUTING_KEY;
 @Slf4j
 @RestController
 @Api("Direct Controller")
+@ConditionalOnBean(RabbitTemplate.class)
 public class DirectController {
 
     @Resource
